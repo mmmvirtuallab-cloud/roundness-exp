@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/roundness-exp/static/css/main.dd5ec506.css",
+    "main.js": "/roundness-exp/static/js/main.5eea2c5d.js",
+    "index.html": "/roundness-exp/index.html",
+    "main.dd5ec506.css.map": "/roundness-exp/static/css/main.dd5ec506.css.map",
+    "main.5eea2c5d.js.map": "/roundness-exp/static/js/main.5eea2c5d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dd5ec506.css",
+    "static/js/main.5eea2c5d.js"
+  ]
+}
