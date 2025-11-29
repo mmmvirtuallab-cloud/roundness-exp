@@ -1,17 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
+import { HashRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Intro from "./intro";
 import RoundnessVirtualLab from "./RoundnessVirtualLab";
 
-export default function App() {
-  const [showExperiment, setShowExperiment] = useState(false);
+function NavigationWrapper() {
+  const navigate = useNavigate();
+
+  // Functionality to trigger navigation after quiz completion
+  const handleStart = () => {
+    navigate("/experiment");
+  };
 
   return (
-    <div>
-      {showExperiment ? (
-        <RoundnessVirtualLab />
-      ) : (
-        <Intro onStart={() => setShowExperiment(true)} />
-      )}
-    </div>
+    <Routes>
+      {/* Base path uses HashRouter, so paths will look like /#/ and /#/experiment */}
+      <Route path="/" element={<Intro onStart={handleStart} />} />
+      <Route path="/experiment" element={<RoundnessVirtualLab />} />
+    </Routes>
+  );
+}
+
+export default function App() {
+  return (
+    <HashRouter>
+      <NavigationWrapper />
+    </HashRouter>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 export default function RoundnessVirtualLab() {
   const [angle, setAngle] = useState(0);
@@ -69,9 +70,7 @@ export default function RoundnessVirtualLab() {
     setRunning(false);
     setAngle(0);
     setShowGraph(false);
-    setTableData((prev) =>
-      prev.map((row) => ({ ...row, deviation: null }))
-    );
+    setTableData((prev) => prev.map((row) => ({ ...row, deviation: null })));
   };
 
   const currentVal = deviationAtDeg(angle);
@@ -114,7 +113,8 @@ export default function RoundnessVirtualLab() {
 
       for (let theta = 0; theta <= 360; theta++) {
         const rad = (theta * Math.PI) / 180;
-        let val = amplitude * (0.6 * Math.sin(2 * rad) + 0.4 * Math.sin(5 * rad));
+        let val =
+          amplitude * (0.6 * Math.sin(2 * rad) + 0.4 * Math.sin(5 * rad));
         if (val < minDeviation) val = minDeviation; // ✅ clamp to -5
         const r = R + val;
         const x = cx + r * Math.cos(rad);
@@ -137,8 +137,17 @@ export default function RoundnessVirtualLab() {
       }}
     >
       <h2 style={{ textAlign: "center" }}>Roundness Virtual Lab</h2>
+      <Link to="/" onClick={handleReset}>
+        Go Back to Intro/Quiz
+      </Link>
 
-      <div style={{ display: "flex", justifyContent: "space-between", gap: "30px" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: "30px",
+        }}
+      >
         {/* Left Side - Simulation */}
         <div style={{ flex: 1, textAlign: "center" }}>
           <svg
@@ -166,7 +175,12 @@ export default function RoundnessVirtualLab() {
                 transformOrigin: `${ballCX}px ${ballCY}px`,
               }}
             >
-              <circle cx={ballCX} cy={ballCY} r={ballR} fill="url(#metalShade)" />
+              <circle
+                cx={ballCX}
+                cy={ballCY}
+                r={ballR}
+                fill="url(#metalShade)"
+              />
               <ellipse
                 cx={ballCX - ballR * 0.3}
                 cy={ballCY - ballR * 0.3}
@@ -189,8 +203,22 @@ export default function RoundnessVirtualLab() {
 
             {/* Dial gauge */}
             <g>
-              <circle cx={dialX} cy={dialY} r={42} fill="url(#bezel)" stroke="#aaa" strokeWidth={3} />
-              <circle cx={dialX} cy={dialY} r={38} fill="#f8fafd" stroke="#bbb" strokeWidth={2} />
+              <circle
+                cx={dialX}
+                cy={dialY}
+                r={42}
+                fill="url(#bezel)"
+                stroke="#aaa"
+                strokeWidth={3}
+              />
+              <circle
+                cx={dialX}
+                cy={dialY}
+                r={38}
+                fill="#f8fafd"
+                stroke="#bbb"
+                strokeWidth={2}
+              />
               {Array.from({ length: 100 }).map((_, i) => {
                 const ang = i * 3.6 - 90;
                 const rad = (ang * Math.PI) / 180;
@@ -200,7 +228,17 @@ export default function RoundnessVirtualLab() {
                 const y1 = dialY + (38 - len) * Math.sin(rad);
                 const x2 = dialX + 36 * Math.cos(rad);
                 const y2 = dialY + 36 * Math.sin(rad);
-                return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#222" strokeWidth={sw} />;
+                return (
+                  <line
+                    key={i}
+                    x1={x1}
+                    y1={y1}
+                    x2={x2}
+                    y2={y2}
+                    stroke="#222"
+                    strokeWidth={sw}
+                  />
+                );
               })}
               {Array.from({ length: 10 }).map((_, i) => {
                 const val = i * 10 === 0 ? 100 : i * 10;
@@ -210,7 +248,15 @@ export default function RoundnessVirtualLab() {
                 const x = dialX + r * Math.cos(rad);
                 const y = dialY + r * Math.sin(rad) + 5;
                 return (
-                  <text key={i} x={x} y={y} textAnchor="middle" fontSize="13" fontWeight="bold" fill="#222">
+                  <text
+                    key={i}
+                    x={x}
+                    y={y}
+                    textAnchor="middle"
+                    fontSize="13"
+                    fontWeight="bold"
+                    fill="#222"
+                  >
                     {val}
                   </text>
                 );
@@ -223,7 +269,14 @@ export default function RoundnessVirtualLab() {
                 stroke="#d00"
                 strokeWidth={3.5}
               />
-              <circle cx={dialX} cy={dialY} r={5.5} fill="#bbb" stroke="#888" strokeWidth={1.2} />
+              <circle
+                cx={dialX}
+                cy={dialY}
+                r={5.5}
+                fill="#bbb"
+                stroke="#888"
+                strokeWidth={1.2}
+              />
               <circle cx={dialX} cy={dialY} r={2.5} fill="#222" />
               <defs>
                 <radialGradient id="metalShade" cx="40%" cy="35%" r="70%">
@@ -248,22 +301,40 @@ export default function RoundnessVirtualLab() {
               height={ballCY - ballR - (dialY + 38) + currentVal * 0.7}
               fill="#222"
             />
-            <circle cx={dialX} cy={ballCY - ballR + currentVal * 0.7} r={5} fill="#222" />
+            <circle
+              cx={dialX}
+              cy={ballCY - ballR + currentVal * 0.7}
+              r={5}
+              fill="#222"
+            />
           </svg>
 
           {/* Controls */}
-          <div style={{ marginTop: 20, display: "flex", gap: 10, justifyContent: "center" }}>
+          <div
+            style={{
+              marginTop: 20,
+              display: "flex",
+              gap: 10,
+              justifyContent: "center",
+            }}
+          >
             <button onClick={handleStart} disabled={angle >= 360}>
               {angle >= 360 ? "Completed" : "Start"}
             </button>
             <button onClick={handleReset}>Reset</button>
           </div>
         </div>
-
         {/* Right Side - Table + Polar Graph */}
         <div style={{ flex: 1 }}>
           <h3 style={{ textAlign: "center" }}>Deviation Table</h3>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "15px" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              gap: "15px",
+            }}
+          >
             {/* Table */}
             <table
               style={{
@@ -274,8 +345,12 @@ export default function RoundnessVirtualLab() {
             >
               <thead>
                 <tr>
-                  <th style={{ border: "1px solid #bbb", padding: "4px" }}>Angle (°)</th>
-                  <th style={{ border: "1px solid #bbb", padding: "4px" }}>Deviation (µm)</th>
+                  <th style={{ border: "1px solid #bbb", padding: "4px" }}>
+                    Angle (°)
+                  </th>
+                  <th style={{ border: "1px solid #bbb", padding: "4px" }}>
+                    Deviation (µm)
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -308,7 +383,12 @@ export default function RoundnessVirtualLab() {
             {showGraph && (
               <div style={{ textAlign: "center" }}>
                 <h4>Polar Graph</h4>
-                <canvas ref={canvasRef} width={250} height={250} style={{ border: "1px solid #aaa" }} />
+                <canvas
+                  ref={canvasRef}
+                  width={250}
+                  height={250}
+                  style={{ border: "1px solid #aaa" }}
+                />
               </div>
             )}
           </div>
