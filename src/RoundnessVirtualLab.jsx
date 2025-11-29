@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; //  Required for navigation back to intro
 
 export default function RoundnessVirtualLab() {
   const [angle, setAngle] = useState(0);
-  const [running, setRunning] = useState(false);
+  // Removed unused: const [running, setRunning] = useState(false);
   const [tableData, setTableData] = useState(
     Array.from({ length: 12 }, (_, i) => ({
       angle: (i + 1) * 30,
@@ -14,7 +14,7 @@ export default function RoundnessVirtualLab() {
   const canvasRef = useRef(null);
 
   const amplitude = 20; // fixed amplitude
-  const minDeviation = -5; // ✅ changed from -10 to -5
+  const minDeviation = -5; // ✅ fixed amplitude boundary
 
   const vBlockY = 220;
   const vBlockCX = 120;
@@ -26,7 +26,7 @@ export default function RoundnessVirtualLab() {
 
   const degToRad = (d) => (d * Math.PI) / 180;
 
-  // ✅ Deviation with lower limit of -5 µm
+  // Deviation calculation (using the fixed lower clamp)
   const deviationAtDeg = (d) => {
     const rad = degToRad(d);
     let val = amplitude * (0.6 * Math.sin(2 * rad) + 0.4 * Math.sin(5 * rad));
@@ -41,12 +41,14 @@ export default function RoundnessVirtualLab() {
   };
 
   const handleStart = () => {
-    setRunning(true);
+    // ❌ Removed setRunning(true)
 
     setTableData((prevTable) => {
       const nextAngle = angle + 30;
+
+      // Check for completion inside the state update is better for race conditions
       if (nextAngle > 360) {
-        setRunning(false);
+        // ❌ Removed setRunning(false);
         setShowGraph(true);
         return prevTable;
       }
@@ -59,15 +61,14 @@ export default function RoundnessVirtualLab() {
 
       setAngle(nextAngle);
       if (nextAngle >= 360) {
-        setRunning(false);
-        setShowGraph(true);
+        setShowGraph(true); //is handled inside the outer condition (line 58)
       }
       return updatedTable;
     });
   };
 
   const handleReset = () => {
-    setRunning(false);
+    // ❌ Removed setRunning(false);
     setAngle(0);
     setShowGraph(false);
     setTableData((prev) => prev.map((row) => ({ ...row, deviation: null })));
@@ -125,7 +126,7 @@ export default function RoundnessVirtualLab() {
       ctx.closePath();
       ctx.stroke();
     }
-  }, [showGraph]);
+  }, [showGraph, minDeviation]); // 💡 Added minDeviation to satisfy react-hooks/exhaustive-deps
 
   return (
     <div
@@ -324,6 +325,7 @@ export default function RoundnessVirtualLab() {
             <button onClick={handleReset}>Reset</button>
           </div>
         </div>
+
         {/* Right Side - Table + Polar Graph */}
         <div style={{ flex: 1 }}>
           <h3 style={{ textAlign: "center" }}>Deviation Table</h3>
