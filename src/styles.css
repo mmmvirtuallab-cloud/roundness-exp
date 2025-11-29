@@ -1,0 +1,25 @@
+.lab-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dial-gauge {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+.gauge-face {
+  border: 2px solid #333;
+  border-radius: 50%;
+  position: relative;
+}
+.needle {
+  width: 2px;
+  height: 70px;
+  background: red;
+  position: absolute;
+  top: 40px;
+  left: 74px;
+  transform-origin: bottom center;
+  transition: transform 0.5s ease;
+}

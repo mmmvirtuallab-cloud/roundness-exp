@@ -1,0 +1,76 @@
+.App {
+  text-align: center;
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+.lab-scene {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin: 40px 0;
+}
+
+.v-block {
+  width: 100px;
+  height: 60px;
+  background: #888;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.workpiece {
+  font-size: 40px;
+  width: 80px;
+  height: 80px;
+  background: #ccc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dial-gauge {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background: #eee;
+  border-radius: 50%;
+  border: 2px solid #333;
+}
+
+.gauge-body {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+}
+
+.needle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 40px;
+  background: red;
+  transform-origin: bottom center;
+}
+
+.controls {
+  margin: 20px;
+}
+
+table {
+  margin: auto;
+  border-collapse: collapse;
+  width: 300px;
+}
+
+th, td {
+  border: 1px solid #aaa;
+  padding: 8px;
+}

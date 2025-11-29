@@ -1,0 +1,45 @@
+.test-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.force-gauge {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.indenter {
+  font-size: 40px;
+  animation: pressDown 2s infinite alternate;
+}
+
+.metal-surface {
+  width: 200px;
+  height: 100px;
+  background: linear-gradient(to bottom, #ccc, #999);
+  position: relative;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.groove {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 20px;
+  background: #666;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+@keyframes pressDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(20px);
+  }
+}
