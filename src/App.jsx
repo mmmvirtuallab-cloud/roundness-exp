@@ -1,6 +1,6 @@
 import React from "react";
 import { HashRouter, Routes, Route, useNavigate } from "react-router-dom";
-import Intro from "./intro";
+import IntroPage from "./IntroPage";
 import RoundnessVirtualLab from "./RoundnessVirtualLab";
 
 function NavigationWrapper() {
@@ -14,7 +14,7 @@ function NavigationWrapper() {
   return (
     <Routes>
       {/* Base path uses HashRouter, so paths will look like /#/ and /#/experiment */}
-      <Route path="/" element={<Intro onStart={handleStart} />} />
+      <Route path="/" element={<IntroPage />} />
       <Route path="/experiment" element={<RoundnessVirtualLab />} />
     </Routes>
   );
@@ -22,7 +22,13 @@ function NavigationWrapper() {
 
 export default function App() {
   return (
-    <HashRouter>
+    // Add the 'future' prop here
+    <HashRouter
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}
+    >
       <NavigationWrapper />
     </HashRouter>
   );

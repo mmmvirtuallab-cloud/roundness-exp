@@ -1,0 +1,5 @@
+CONTAINER ID   IMAGE                                    COMMAND                  CREATED       STATUS       PORTS                                     NAMES
+a6bfa3a59aef   lscr.io/linuxserver/code-server:latest   "/init"                  2 hours ago   Up 2 hours                                             ptvirtuallab_vscode
+24606591417a   portainer/portainer-ce:latest            "/portainer"             2 hours ago   Up 2 hours                                             portainer
+de4e8c2ac2b3   nginx:alpine                             "/docker-entrypoint.…"   2 hours ago   Up 2 hours   0.0.0.0:4545->80/tcp, [::]:4545->80/tcp   gateway
+f8231fc05817   tailscale/tailscale:latest               "/usr/local/bin/cont…"   2 hours ago   Up 2 hours                                             ts_sidecar
