@@ -2,14 +2,18 @@
   "name": "roundness-exp",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mmmvirtuallab-cloud.github.io/roundness-exp",
   "dependencies": {
+    "@remix-run/router": "^1.23.0",
+    "@rolldown/pluginutils": "1.0.0-beta.57",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "picocolors": "^1.1.1",
+    "postcss": "^8.5.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-router": "^7.11.0",
     "react-router-dom": "^6.25.1",
     "web-vitals": "^2.1.4"
   },
@@ -19,7 +23,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "dist"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",

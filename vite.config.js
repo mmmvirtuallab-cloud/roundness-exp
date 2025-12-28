@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   // This base URL is needed for GitHub Pages deployment
   // It matches the repo name from your homepage URL
-  base: '/roundness-exp/', 
+  base: './', 
   server: {
     open: true, // Opens browser automatically when running npm run dev
   },

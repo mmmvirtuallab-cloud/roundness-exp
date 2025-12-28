@@ -8,7 +8,7 @@ const IntroPage = () => {
 
   const handleHomeClick = () => {
     // Navigates to the main site Home (outside this React app)
-    window.location.href = "/home/";
+    window.location.href = "../home/";
   };
 
   const handleExperimentClick = () => {
